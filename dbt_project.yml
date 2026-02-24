@@ -1,0 +1,28 @@
+name: garmin_coospo_recon
+version: "1.0.0"
+config-version: 2
+
+profile: garmin_coospo_recon
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+
+models:
+  garmin_coospo_recon:
+    +materialized: view
+    staging:
+      +materialized: view
+    intermediate:
+      +materialized: view
+    marts:
+      +materialized: table
+
+seeds:
+  garmin_coospo_recon:
+    +schema: analytics
+    +quote_columns: false
+
+vars:
+  # Set resampling granularity (seconds). 1 = per second, 5 = per 5-second buckets, etc.
+  hr_resample_seconds: 5
