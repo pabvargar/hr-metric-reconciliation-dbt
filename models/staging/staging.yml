@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: stg_sessions
+    columns:
+      - name: session_id
+        tests: [not_null, unique]
+      - name: lthr_bpm
+        tests:
+          - not_null
+
+  - name: stg_garmin_hr_samples
+    columns:
+      - name: session_id
+        tests: [not_null]
+      - name: sample_ts
+        tests: [not_null]
+      - name: hr_bpm
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 30
+              max_value: 240
+
+  - name: stg_coospo_hr_samples
+    columns:
+      - name: session_id
+        tests: [not_null]
+      - name: sample_ts
+        tests: [not_null]
+      - name: hr_bpm
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 30
+              max_value: 240
