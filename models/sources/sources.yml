@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: raw
+    tables:
+      - name: garmin_hr_samples
+      - name: coospo_hr_samples
+      - name: sessions
