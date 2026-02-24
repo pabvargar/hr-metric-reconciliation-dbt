@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: int_hr_samples_union
+    columns:
+      - name: session_id
+        tests: [not_null]
+      - name: device
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['garmin', 'coospo']
+
+  - name: int_hr_samples_resampled
+    columns:
+      - name: session_id
+        tests: [not_null]
+      - name: bucket_id
+        tests: [not_null]
+      - name: hr_bpm
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 30
+              max_value: 240
