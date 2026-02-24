@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: fct_session_hr_summary
+    columns:
+      - name: session_id
+        tests: [not_null]
+      - name: device
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['garmin', 'coospo']
+
+  - name: fct_session_time_in_zone
+    columns:
+      - name: session_id
+        tests: [not_null]
+      - name: zone
+        tests:
+          - not_null
+          - accepted_values:
+              values: [1,2,3,4,5]
+
+  - name: rpt_garmin_vs_coospo_recon
+    columns:
+      - name: session_id
+        tests: [not_null, unique]
